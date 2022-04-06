@@ -10,5 +10,7 @@ namespace CampusGuidebook.Data
         {
         }
 
+        public DbSet<AppDbContext> _Db { get; set; }
+
     }
 }
