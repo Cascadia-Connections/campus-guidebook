@@ -1,16 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CampusGuidebook.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CampusGuidebook.Data
 
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-           : base(options)
-        {
-        }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<AppDbContext> _Db { get; set; }
+
+
+        public DbSet<EventsModel> _Db { get; set; }
 
     }
 }

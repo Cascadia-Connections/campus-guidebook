@@ -22,14 +22,13 @@ namespace CampusGuidebook.Models
         public string ImgUri { get; set; }
 
         [Required]
-        public Dictionary<string, string> Properties { get; set; }
+        public HashSet<string> Properties { get; set; }
 
         [Required]
-        public TimeZoneInfo LastUpdated { get; set; }
+        public DateTime LastUpdated { get; set; }
 
         [Required]
         public int uploadStatus { get; set; }
-
 
 
     }

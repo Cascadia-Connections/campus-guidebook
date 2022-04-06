@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add Databases Services to Container.
-var DefaultConnectionString = builder.Configuration.GetConnectionString("AppDefault-Mac");
-var IdentityConnectionString = builder.Configuration.GetConnectionString("AppIdentity-Mac");
+var DefaultConnectionString = builder.Configuration.GetConnectionString("AppDefault-SqlServer");
+var IdentityConnectionString = builder.Configuration.GetConnectionString("AppIdentity-SqlServer");
 
 //Enable for use of Sqlite on Mac
 //builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(DefaultConnectionString));
