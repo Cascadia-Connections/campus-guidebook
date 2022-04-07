@@ -32,6 +32,5 @@ namespace CampusGuidebook.Models
         [Required]
         public int uploadStatus { get; set; }
 
-
     }
 }

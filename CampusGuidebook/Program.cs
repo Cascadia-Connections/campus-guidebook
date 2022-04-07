@@ -22,6 +22,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<AppIdentityDbContext>();
 builder.Services.AddControllersWithViews();
 
+//DIJ for AppDbContext
+builder.Services.AddScoped<AppDbContext>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

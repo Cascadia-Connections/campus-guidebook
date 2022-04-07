@@ -1,15 +1,18 @@
-﻿using System.Diagnostics;
+﻿using CampusGuidebook.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using CampusGuidebook.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace CampusGuidebook.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    public DbContext dbConext;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, DbContext dbContext)
     {
+        this.dbConext = dbContext;
         _logger = logger;
     }
 
