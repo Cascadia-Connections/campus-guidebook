@@ -9,5 +9,6 @@ public class AppIdentityDbContext : IdentityDbContext
         : base(options)
     {
     }
+
 }
 

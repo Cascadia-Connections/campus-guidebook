@@ -1,0 +1,38 @@
+﻿@using Microsoft.Extensions.Configuration
+@model CampusGuidebook.Models.EventInfoFactory;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<form>
+
+<h1>Event Information</h1>
+
+<h2>Pending Events</h2>
+    @foreach (var eventInfoModel in @Model.eventInfoModels.Where(a => a.EventStatus.Equals("Pending")))
+    {
+        <div > <!-- Added in -->
+            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="holder">@eventInfoModel.EventName</a>
+        </div>
+        
+    }
+
+<h2>Denied Events</h2>
+     @foreach (var eventInfoModel in @Model.eventInfoModels.Where(a => a.EventStatus.Equals("Denied")))
+    {
+        <div > <!-- Added in -->
+            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="holder">@eventInfoModel.EventName</a>
+        </div>
+    }
+
+<h2>Approved Events</h2>
+     @foreach (var eventInfoModel in @Model.eventInfoModels.Where(a => a.EventStatus.Equals("Approved")))
+    {
+        <div > <!-- Added in -->
+            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="holder">@eventInfoModel.EventName</a>
+        </div>
+    }
+
+</form>
