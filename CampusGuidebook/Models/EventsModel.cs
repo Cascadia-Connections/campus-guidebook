@@ -22,9 +22,12 @@ namespace CampusGuidebook.Models
 
         [Required]
         public String Longitude { get; set; }
+
+        [Required]
         public String Latitude { get; set; }
 
-        public DateTime lastUpdated { get; set; } = DateTime.UtcNow;
+        [Required]
+        public DateTime LastUpdated { get; set; } = DateTime.UtcNow;
 
         [Required]
         public int uploadStatus { get; set; }

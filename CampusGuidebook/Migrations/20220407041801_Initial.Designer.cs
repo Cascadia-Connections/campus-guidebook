@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampusGuidebook.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220407040149_Add_DateTime_UTC")]
-    partial class Add_DateTime_UTC
+    [Migration("20220407041801_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,6 +40,9 @@ namespace CampusGuidebook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Latitude")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -56,15 +59,12 @@ namespace CampusGuidebook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("lastUpdated")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("uploadStatus")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.ToTable("_Db");
+                    b.ToTable("EventTable");
                 });
 #pragma warning restore 612, 618
         }

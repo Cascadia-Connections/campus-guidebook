@@ -38,6 +38,9 @@ namespace CampusGuidebook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Latitude")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -54,15 +57,12 @@ namespace CampusGuidebook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("lastUpdated")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("uploadStatus")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.ToTable("_Db");
+                    b.ToTable("EventTable");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,8 +9,7 @@ namespace CampusGuidebook.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
 
-
-        public DbSet<EventsModel> _Db { get; set; }
+        public DbSet<EventsModel> EventTable { get; set; }
 
     }
 }
