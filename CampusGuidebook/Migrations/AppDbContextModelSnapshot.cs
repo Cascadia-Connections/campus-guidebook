@@ -57,7 +57,7 @@ namespace CampusGuidebook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("uploadStatus")
+                    b.Property<int>("UploadStatus")
                         .HasColumnType("int");
 
                     b.HasKey("id");

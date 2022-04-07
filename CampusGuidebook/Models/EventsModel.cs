@@ -30,7 +30,7 @@ namespace CampusGuidebook.Models
         public DateTime LastUpdated { get; set; } = DateTime.UtcNow;
 
         [Required]
-        public int uploadStatus { get; set; }
+        public int UploadStatus { get; set; }
 
     }
 }

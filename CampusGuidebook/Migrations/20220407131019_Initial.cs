@@ -22,7 +22,7 @@ namespace CampusGuidebook.Migrations
                     Longitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Latitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    uploadStatus = table.Column<int>(type: "int", nullable: false)
+                    UploadStatus = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
