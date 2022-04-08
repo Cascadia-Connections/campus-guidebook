@@ -1,4 +1,4 @@
-﻿@model CampusGuidebook.ViewModel.EventModel
+﻿@model CampusGuidebook.ViewModel.EventViewModel;
 @addTagHelper "*, Microsoft.aspNetCore.Mvc.TagHelpers"
 @{
     ViewData["Title"] = "Home Page";
@@ -10,7 +10,7 @@
 </div>
 <div>
     <p>Event status</p>
-        <select asp-for="EventStatus" asp-items="@new SelectList(Enum.GetNames(typeof(EventStatusType)))"></select>
-        <option disabled selected value="">Pending...</option>
+        <select asp-for="uploadStatus" asp-items="@new SelectList(Enum.GetNames(typeof(EventStatusType)))"></select>
+        <option disabled selected value="">@UploadStatusString</option>
 </div>
 
