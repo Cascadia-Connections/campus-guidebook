@@ -1,19 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using CampusGuidebook.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using CampusGuidebook.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add Databases Services to Container.
-var DefaultConnectionString = builder.Configuration.GetConnectionString("AppDefault-Mac");
-var IdentityConnectionString = builder.Configuration.GetConnectionString("AppIdentity-Mac");
+var DefaultConnectionString = builder.Configuration.GetConnectionString("AppDefault-SqlServer");
+var IdentityConnectionString = builder.Configuration.GetConnectionString("AppIdentity-SqlServer");
 
 //Enable for use of Sqlite on Mac
 //builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(DefaultConnectionString));
 //builder.Services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlite(IdentityConnectionString));
 
 //Enable for use of SqlServer on Windows
-//builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(DefaultConnectionString));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(DefaultConnectionString));
 builder.Services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(IdentityConnectionString));
 
 // Add Developer, Identity and Controller Services
@@ -21,6 +21,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<AppIdentityDbContext>();
 builder.Services.AddControllersWithViews();
+
+//DIJ for AppDbContext
+builder.Services.AddScoped<AppDbContext>();
 
 var app = builder.Build();
 
