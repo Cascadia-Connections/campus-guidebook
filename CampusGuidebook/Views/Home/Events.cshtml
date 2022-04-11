@@ -5,23 +5,26 @@
 }
 <h1>Events</h1>
 <div class="EventList">
+    <!---Search function below-->
     <form asp-action="Index">
         Search: <imput id="SearchEvent" name="SearchEvent"/>
         <imput type="submit" value="Find Event"></imput>
         <a asp-action="SearchEvents" asp-controller="Home"></a>
     </form>
+
+    <!---Each event made into a list below-->
     @foreach (var Events in Model){
-        <tr>
-            <td></td>
-            <div class="SingleEventBox">
-                <a asp-action="EventSelected" asp-controller="Home" asp-route-id="@Events.id">
-                    <td><img src="@Events.ImgUri" class="EventImage"></img>
-                    @Events.Name</td></a>
-            </div>
+        <table>
+        <tr class="SingleEventBox">
+            <a asp-action="EventSelected" asp-controller="Home" asp-route-id="@Events.id">
+            <td><img src="@Events.ImgUri" class="EventImage"></img>
+                          @Events.Name</td></a>
         </tr>
+        </table>
     }
 </div>
 
+<!---Displays selected event info-->
 <div class="EventInfo">
     <p>@Events.Name</p>
         <select asp-for="UploadStatusString" asp-items="@new SelectList(Enum.GetNames(typeof(UploadStatusEnum)))"></select>
@@ -32,7 +35,7 @@
     <p></p>
 </div>
 
-
+<!---Additional scripting and css to lign up the page-->
 <script>
     $( function(){
     $("imput#SearchEvent").autocomplete({
@@ -47,12 +50,14 @@
         height: 35vh;
         float: left;
     }
-    .EventInfo{ 
+    .EventInfo{
         float: right; }
     .EventImage{
         width: 3.5vw;
         height: 3.5vw;
         float: left;
+    } table{
+    border-collapse: collapse;
     }
     .EventDescription{}
 </css>
