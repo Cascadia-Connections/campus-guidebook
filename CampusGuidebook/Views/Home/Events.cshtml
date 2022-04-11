@@ -1,0 +1,55 @@
+﻿@model CampusGuidebook.ViewModel.EventViewModel;
+@addTagHelper "*, Microsoft.aspNetCore.Mvc.TagHelpers"
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h1>Events</h1>
+<div class="EventList">
+    <form asp-action="Index">
+        Search: <imput id="SearchEvent" name="SearchEvent"/>
+        <imput type="submit" value="Find Event"></imput>
+        <a asp-action="SearchEvents" asp-controller="Home"></a>
+    </form>
+    @foreach (var Events in Model){
+        <tr>
+            <td></td>
+            <div class="SingleEventBox">
+                <a asp-action="EventSelected" asp-controller="Home" asp-route-id="@Events.id">
+                    <td><img src="@Events.ImgUri" class="EventImage"></img>
+                    @Events.Name</td></a>
+            </div>
+        </tr>
+    }
+</div>
+
+<div class="EventInfo">
+    <p>@Events.Name</p>
+        <select asp-for="UploadStatusString" asp-items="@new SelectList(Enum.GetNames(typeof(UploadStatusEnum)))"></select>
+        <option disabled selected value="">@UploadStatusString</option>
+    <p>@Events.Location</p>
+    <p class="EventDescription">@Events.Description</p>
+
+</div>
+
+
+<script>
+    $( function(){
+    $("imput#SearchEvent").autocomplete({
+        source: "api/Event/Name",
+        minLength: 2
+    });});
+</script>
+<css>
+    .EventList{
+        position: relative;
+        width: 15vw;
+        height: 35vh;
+    }
+    .EventInfo{ 
+        position: right; }
+    .EventImage{
+        width: 3.5vw;
+        height: 3.5vw;
+    }
+    .EventDescription{}
+</css>
