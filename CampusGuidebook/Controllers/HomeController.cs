@@ -35,7 +35,7 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    /// Naming Subject to change based off of project team's work. Returns View for Admin user input with a new EventModel instance.
+    /// Naming Subject to change based off of project team's work. Returns View for Admin user input with a new EventViewModel instance.
     /// 
     /// </summary>
     /// <returns>EventResponse view to obtain user input. Passes a new EventViewModel object to obtain user data.</returns>
@@ -56,7 +56,7 @@ public class HomeController : Controller
             Longitude = EventToProcess.Longitude,
             Latitude = EventToProcess.Latitude,
             LastUpdated = EventToProcess.LastUpdated,
-            UploadStatus = EventToProcess.UploadStatus
+            UploadStatus = EventToProcess.UploadStatus //Should call it's own setter and resolve to an integer value 0 <= x <= 2, in this instance it should always resolve to 0; 
 
         };
         return EventResponse(displayEvent);
@@ -67,9 +67,7 @@ public class HomeController : Controller
     {
         if (!ModelState.IsValid)
         {
-
             return View(EventViewModel);
-
         }
 
         else
@@ -80,7 +78,27 @@ public class HomeController : Controller
 
         dbContext.SaveChanges();
 
-        return EventResponse();
+        return EventResponse(); // Returns to next pending Event in DB that is actionable. 
+    }
+
+
+    [HttpGet]
+    public IActionResult SearchEvents()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public ActionResult SearchEvents(EventSearchViewModel SearchVM)
+    {
+        EventSearchResultVM eventSearchResults = new EventSearchResultVM();
+
+        if (SearchVM.UploadStatus >= 0)
+        {
+            eventSearchResults.EventList = eventSearchResults.EventList.Where(e => e.UploadStatus == SearchVM.UploadStatus);
+        }
+
+        return View("EventsSearchResult", eventSearchResults);
     }
 }
 

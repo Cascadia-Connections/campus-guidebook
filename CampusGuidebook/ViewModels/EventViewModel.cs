@@ -18,28 +18,34 @@ namespace CampusGuidebook.ViewModels
         public long id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [Required]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         [Required]
-        public string Location { get; set; }
+        public string Location { get; set; } = string.Empty;
 
         [Required]
-        public string ImgUri { get; set; }
+        public string ImgUri { get; set; } = string.Empty;
 
         [Required]
-        public String Longitude { get; set; }
+        public String Longitude { get; set; } = String.Empty;
 
         [Required]
-        public String Latitude { get; set; }
+        public String Latitude { get; set; } = String.Empty;
 
         [Required]
         public DateTime LastUpdated { get; set; } = DateTime.UtcNow;
 
+        /// <summary>
+        /// UploadStatusString Is an enumeration that is passed from the view, passed to this viewmodel and processed here before setting the interger value to UploadStatus
+        /// UploadStatusString DNE in the Model
+        ///
+        /// </summary>
+
         [Required]
-        public UploadStatusEnum UploadStatusString { get; set; }
+        public UploadStatusEnum UploadStatusString { get; set; } = 0;
 
         [Required]
         public int UploadStatus
@@ -48,15 +54,16 @@ namespace CampusGuidebook.ViewModels
             set { StatusStringToInt(); }
         }
 
-        ///<summary>
-        ///Properties, instance variables, Enums above Here
-        ///
-        /// Methods and input processing below here (Unless through annotations)
-        ///</summary>
 
-        /// Although enumerations are auto indexed, properties may not be automatically assigned to each other in their declaration fields.
-        /// The purpose of this method is simply to assign the auto generated integer Enum value to to exisitng UploadStatus int property.
-        /// 
+        /// Properties, instance variables, Enums above Here
+        ///
+        /// Methods and input processing below here(Unless through annotations)
+
+
+        ///<summary>
+        /// StatusStringToInt() ensures that the auto indexed INT Value of the above enumeration is passed to 
+        /// Upload Value via its setter. 
+        ///</summary>
         public void StatusStringToInt()
         {
             UploadStatus = (int)UploadStatusString;
