@@ -1,56 +1,36 @@
-﻿@model CampusGuidebook.ViewModel.EventViewModel;
+﻿@model CampusGuidebook.ViewModels.EventViewModel;
 @addTagHelper "*, Microsoft.aspNetCore.Mvc.TagHelpers"
 @{
     ViewData["Title"] = "Event Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1>Events</h1>
-<div class="EventList">
-    <!---Search function below-->
-    <form asp-action="Index">
-        Search: <imput id="SearchEvent" name="SearchEvent"/>
-        <imput type="submit" value="Find Event"></imput>
-        <a asp-action="SearchEvents" asp-controller="Home"></a>
-    </form>
-
-    <!---Each event made into a list below-->
-    @foreach (var Events in Model){
-        <table>
-        <tr class="SingleEventBox">
-            <a asp-action="EventSelected" asp-controller="Home" asp-route-id="@Events.id">
-            <td><img src="@Events.ImgUri" class="EventImage"></img>
-                          @Events.Name</td></a>
-        </tr>
-        </table>
-    }
-</div>
-
+<h1>Event</h1>
 <!---Displays selected event info-->
 <div class="EventInfo">
-    <img class="DisplayImg" src="@Events.ImgUri"></img>
-    <p>@Events.Name</p>
-        <select asp-for="UploadStatusString" asp-items="@new SelectList(Enum.GetNames(typeof(UploadStatusEnum)))"></select>
-        <option disabled selected value="">@UploadStatusString</option>
-    <p>@Events.Location</p>
+    <img class="DisplayImg" src="@Model.ImgUri"></img>
+    <p>@Model.Name</p>
+    <p>Current status: @Model.UploadStatusString</p>
+        <select asp-for=""></select>
+            <option value="Pending">Pending</option>
+            <option value="Rejected">Rejected</option>
+            <option value="Accepted">Accepted</option>
+
+
+        <select asp-for="UploadStatusString" asp-items="@new SelectList(Enum.GetNames(typeof(@Model.UploadStatusString)))"></select>
+        <option disabled selected value="">@Model.UploadStatusString</option>
+    <p>@Model.Location</p>
 
     <label for="desc">Description:</label>
-    <imput type="text" id="EventDescription">@Events.Description</imput>
+    <imput type="text" id="EventDescription">@Model.Description</imput>
     <imput type="submit" value="save">
 
-    <p>@Events.LastUpdated</p>
+    <p>@Model.LastUpdated</p>
 
     <!---This is where the hiden rejection box goes with the block and whatnot-->
     <p></p>
-</div>
+<div/>
 
 <!---Additional scripting and css to lign up the page-->
-<script>
-    $( function(){
-    $("imput#SearchEvent").autocomplete({
-        source: "api/Event/Name",
-        minLength: 2
-    });});
-</script>
 <css>
     .EventList{
         position: relative;
