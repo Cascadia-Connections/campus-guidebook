@@ -1,4 +1,5 @@
-﻿@model CampusGuidebook.ViewModels.EventViewModel;
+﻿@using SelectBindingEnum.Models;
+@model CampusGuidebook.ViewModels.EventViewModel;
 @addTagHelper "*, Microsoft.aspNetCore.Mvc.TagHelpers"
 @{
     ViewData["Title"] = "Event Page";
@@ -10,17 +11,12 @@
     <img class="DisplayImg" src="@Model.ImgUri"></img>
     <p>@Model.Name</p>
     <p>Current status: @Model.UploadStatusString</p>
-        <select asp-for=""></select>
+    <p>@Model.Location</p>
+        <select asp-for="@Model.UploadStatusString" asp-items="Html.GetEnumSelectList<UploadStatusEnum>()"></select>
             <option value="Pending">Pending</option>
             <option value="Rejected">Rejected</option>
             <option value="Accepted">Accepted</option>
 
-
-        <select asp-for="UploadStatusString" asp-items="@new SelectList(Enum.GetNames(typeof(@Model.UploadStatusString)))"></select>
-        <option disabled selected value="">@Model.UploadStatusString</option>
-    <p>@Model.Location</p>
-
-    <label for="desc">Description:</label>
     <imput type="text" id="EventDescription">@Model.Description</imput>
     <imput type="submit" value="save">
 
@@ -32,21 +28,14 @@
 
 <!---Additional scripting and css to lign up the page-->
 <css>
-    .EventList{
-        position: relative;
-        width: 15vw;
-        height: 35vh;
-        float: left;
-    }
+    
     .EventInfo{
         float: right; }
     .EventImage{
         width: 3.5vw;
         height: 3.5vw;
         float: left;
-    } table{
-    border-collapse: collapse;
-    }
+    } 
     #EventDescription{
     width: 15vw;
     height: 10vh;
