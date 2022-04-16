@@ -41,9 +41,16 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult EventResponse()
     {
+
+
         EventsModel EventToProcess = dbContext.EventTable
                                               .Where(e => e.UploadStatus == 0)
                                               .FirstOrDefault();
+
+        if (EventToProcess == null)
+        {
+            return RedirectToAction("NoPendingEvents");
+        }
 
         EventViewModel displayEvent = new EventViewModel()
         {
@@ -55,24 +62,35 @@ public class HomeController : Controller
             Longitude = EventToProcess.Longitude,
             Latitude = EventToProcess.Latitude,
             LastUpdated = EventToProcess.LastUpdated,
-            UploadStatus = EventToProcess.UploadStatus //Should call it's own setter and resolve to an integer value 0 <= x <= 2, in this instance it should always resolve to 0; 
+            UploadStatus = EventToProcess.UploadStatus,
 
         };
-        return EventResponse(displayEvent);
+
+        return View(displayEvent);
     }
 
     [HttpPost]
-    public IActionResult EventResponse(EventViewModel EventViewModel)
+    public IActionResult EventResponse(EventViewModel DecisionToPost)
     {
-
-
-        dbContext.EventTable.Find(EventViewModel.id).UploadStatus = EventViewModel.UploadStatus;
-
-
+        EventsModel UploadToDB = new()
+        {
+            id = DecisionToPost.id,
+            Name = DecisionToPost.Name,
+            Description = DecisionToPost.Description,
+            Location = DecisionToPost.Location,
+            ImgUri = DecisionToPost.ImgUri,
+            Latitude = DecisionToPost.Latitude,
+            Longitude = DecisionToPost.Longitude,
+            LastUpdated = DecisionToPost.LastUpdated,
+            UploadStatus = DecisionToPost.UploadStatus
+        };
+        dbContext.Update(UploadToDB);
         dbContext.SaveChanges();
 
-        return EventResponse(); // Returns to next pending Event in DB that is actionable. 
+
+        return RedirectToAction("EventResponse"); // Returns to next pending Event in DB that is actionable. 
     }
+
 
 
     [HttpGet]
@@ -100,6 +118,11 @@ public class HomeController : Controller
         eventSearchResults.EventList = dbContext.EventTable.Where(e => e.id >= 0);
 
         return View(eventSearchResults);
+    }
+
+    public IActionResult NoPendingEvents()
+    {
+        return View();
     }
 }
 

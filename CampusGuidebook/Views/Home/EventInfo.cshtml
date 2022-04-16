@@ -1,4 +1,4 @@
-﻿@using Microsoft.Extensions.Configuration
+﻿@addTagHelper "*, Microsoft.aspNetCore.Mvc.TagHelpers"
 @model CampusGuidebook.ViewModels.EventSearchResultVM;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,7 +22,19 @@
         
     }
 
-<h2>Denied Events</h2>
+<h2>Approved</h2>
+     @foreach (var eventInfoModel in @Model.EventList)
+    {
+        if(eventInfoModel.UploadStatus == 1)
+        {
+        <div > <!-- Added in -->
+            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="holder">@eventInfoModel.Name</a>
+        </div>
+        }
+
+    }
+
+<h2>Denied</h2>
      @foreach (var eventInfoModel in @Model.EventList)
     {
         if(eventInfoModel.UploadStatus == 2)
@@ -33,17 +45,4 @@
         }
 
     }
-
-<h2>Approved Events</h2>
-     @foreach (var eventInfoModel in @Model.EventList)
-    {
-        if(eventInfoModel.UploadStatus == 2)
-        {
-        <div > <!-- Added in -->
-            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="holder">@eventInfoModel.Name</a>
-        </div>
-        }
-
-    }
-<a asp-controller="Home" asp-action="Index">Home</a>
 </form>
