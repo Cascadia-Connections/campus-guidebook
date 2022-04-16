@@ -1,4 +1,10 @@
-﻿namespace CampusGuidebook.Controllers;
+﻿using CampusGuidebook.Data;
+using CampusGuidebook.Models;
+using CampusGuidebook.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+
+namespace CampusGuidebook.Controllers;
 
 public class HomeController : Controller
 {
