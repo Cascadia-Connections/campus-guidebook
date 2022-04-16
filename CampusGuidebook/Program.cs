@@ -1,8 +1,4 @@
-﻿using CampusGuidebook.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
-var builder = WebApplication.CreateBuilder(args);
+﻿var builder = WebApplication.CreateBuilder(args);
 
 // Add Databases Services to Container.
 var DefaultConnectionString = builder.Configuration.GetConnectionString("AppDefault-SqlServer");
@@ -21,6 +17,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<AppIdentityDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<AppDbContext>();
 
 //DIJ for AppDbContext
 builder.Services.AddScoped<AppDbContext>();
