@@ -64,16 +64,10 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult EventResponse(EventViewModel EventViewModel)
     {
-        if (!ModelState.IsValid)
-        {
-            return View(EventViewModel);
-        }
 
-        else
-        {
-            dbContext.EventTable.Find(EventViewModel.id).UploadStatus = EventViewModel.UploadStatus;
 
-        }
+        dbContext.EventTable.Find(EventViewModel.id).UploadStatus = EventViewModel.UploadStatus;
+
 
         dbContext.SaveChanges();
 
@@ -82,22 +76,32 @@ public class HomeController : Controller
 
 
     [HttpGet]
-    public IActionResult SearchEvents()
+    public IActionResult EventInfo()
     {
-        return View();
-    }
+        //Plugging in some data to test view
 
-    [HttpPost]
-    public ActionResult SearchEvents(EventSearchViewModel SearchVM)
-    {
-        EventSearchResultVM eventSearchResults = new EventSearchResultVM();
-
-        if (SearchVM.UploadStatus >= 0)
+        EventsModel Test = new EventsModel()
         {
-            eventSearchResults.EventList = eventSearchResults.EventList.Where(e => e.UploadStatus == SearchVM.UploadStatus);
-        }
+            Name = "Test",
+            Description = "Test",
+            Location = "Test",
+            Latitude = "Test",
+            Longitude = "Test",
+            ImgUri = "Test",
+            LastUpdated = DateTime.Now,
+            UploadStatus = 0
 
-        return View("EventsSearchResult", eventSearchResults);
+        };
+        dbContext.Add(Test);
+        dbContext.SaveChanges();
+        //This can be removed for Bogus, but the code runs 
+
+        EventSearchResultVM eventSearchResults = new EventSearchResultVM();
+        eventSearchResults.EventList = dbContext.EventTable.Where(e => e.id >= 0);
+
+        return View(eventSearchResults);
     }
 }
+
+
 

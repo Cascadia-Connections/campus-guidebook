@@ -1,5 +1,5 @@
 ﻿@using Microsoft.Extensions.Configuration
-@model CampusGuidebook.ViewModels.EventSearchViewModel;
+@model CampusGuidebook.ViewModels.EventSearchResultVM;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -10,28 +10,40 @@
 <h1>Event Information</h1>
 
 <h2>Pending Events</h2>
-    @foreach (var eventInfoModel in @Model.Where(a => a.EventStatus.Equals("Pending")))
+    @foreach (var eventInfoModel in @Model.EventList)
     {
+        if(eventInfoModel.UploadStatus == 0)
+        {
         <div > <!-- Added in -->
-            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="holder">@eventInfoModel.EventName</a>
+            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="holder">@eventInfoModel.Name</a>
         </div>
+        }
+
         
     }
 
 <h2>Denied Events</h2>
-     @foreach (var eventInfoModel in @Model.Where(a => a.EventStatus.Equals("Denied")))
+     @foreach (var eventInfoModel in @Model.EventList)
     {
+        if(eventInfoModel.UploadStatus == 2)
+        {
         <div > <!-- Added in -->
-            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="holder">@eventInfoModel.EventName</a>
+            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="holder">@eventInfoModel.Name</a>
         </div>
+        }
+
     }
 
 <h2>Approved Events</h2>
-     @foreach (var eventInfoModel in @Model.eventInfoModels.Where(a => a.EventStatus.Equals("Approved")))
+     @foreach (var eventInfoModel in @Model.EventList)
     {
+        if(eventInfoModel.UploadStatus == 2)
+        {
         <div > <!-- Added in -->
-            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="holder">@eventInfoModel.EventName</a>
+            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="holder">@eventInfoModel.Name</a>
         </div>
-    }
+        }
 
+    }
+<a asp-controller="Home" asp-action="Index">Home</a>
 </form>
