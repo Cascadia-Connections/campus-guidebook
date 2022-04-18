@@ -16,6 +16,8 @@ namespace CampusGuidebook.Models
         public string EventStatus { get; set; }
 
         public static List<EventInfoModel> eventModelHolder = new List<EventInfoModel>();
+        //Merge all branches into 1 test branch and then have 'bogus' apply in the database so we can check to make sure it works
+        //Done before midnight on tuesday
 
     }
 }
