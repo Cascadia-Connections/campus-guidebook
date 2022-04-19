@@ -84,6 +84,7 @@ public class HomeController : Controller
             LastUpdated = DecisionToPost.LastUpdated,
             UploadStatus = DecisionToPost.UploadStatus
         };
+
         dbContext.Update(UploadToDB);
         dbContext.SaveChanges();
 
@@ -98,19 +99,18 @@ public class HomeController : Controller
     {
         //Plugging in some data to test view
 
-        EventsModel Test = new EventsModel()
-        {
-            Name = "Test",
-            Description = "Test",
-            Location = "Test",
-            Latitude = "Test",
-            Longitude = "Test",
-            ImgUri = "Test",
-            LastUpdated = DateTime.Now,
-            UploadStatus = 0
 
-        };
-        dbContext.Add(Test);
+        List<EventsModel> SeedList = new List<EventsModel>();
+
+        EventsModel Event = new EventsModel();
+
+        for (int i = 0; i < 15; i++)
+        {
+            Event = new SeedData().testEventsDB.Generate();
+            SeedList.Add(Event);
+        }
+
+        dbContext.AddRange(SeedList);
         dbContext.SaveChanges();
         //This can be removed for Bogus, but the code runs 
 
