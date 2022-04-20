@@ -1,0 +1,71 @@
+﻿@model CampusGuidebook.ViewModels.EventViewModel;
+@addTagHelper "*, Microsoft.aspNetCore.Mvc.TagHelpers"
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h1>Pending Event</h1>
+
+<table>
+  <tr>
+    <th>Event Name</th>
+    <th>Description</th>
+    <th>Location</th>
+    <th>ImgUri</th>
+    <th>Longitude</th>
+    <th>Latitude</th>
+    <th>LastUpdated</th>
+    <th>UploadStatus</th>
+  </tr>
+  <tr>
+    <td>@Model.Name</td>
+    <td>@Model.Description</td>
+    <td>@Model.Location</td>
+    <td>@Model.ImgUri</td>
+    <td>@Model.Longitude</td>
+    <td>@Model.Latitude</td>
+    <td>@Model.LastUpdated</td>
+    <td>@Model.UploadStatus</td>
+  </tr>
+</table>
+
+
+<form asp-controller="Home" asp-action="EventResponse" method="Post">
+
+    <div hidden="true">
+    <input asp-for= "id" value=@Model.id>
+    <input asp-for= "Name" value=@Model.Name>
+    <input asp-for= "Description" value=@Model.Description>
+    <input asp-for= "Location" value=@Model.Location>
+    <input asp-for= "ImgUri" value=@Model.ImgUri>
+    <input asp-for= "Longitude" value=@Model.Longitude>
+    <input asp-for= "Latitude" value=@Model.Latitude>
+    <input asp-for= "LastUpdated" value=@Model.LastUpdated>
+    </div>
+
+    <div>
+        <h2>Approve or reject the Event</h2>
+            <label asp-for="UploadStatus">Event Decision?:</label>
+            <select type="text" asp-for="UploadStatus">
+                <option value=1>Approve</option>
+                <option value=2>Reject</option>
+            </select>
+    </div>
+
+    <button class="" type="submit" asp-controller="Home" asp-action="EventResponse">Submit</button>
+</form>
+
+
+
+<!-- In Page temp styles for readability-->
+
+<style>
+    
+   th{
+       padding-left: .5rem;
+       padding-right: .5rem;
+       border-right: solid 1px black;
+   }
+</style>

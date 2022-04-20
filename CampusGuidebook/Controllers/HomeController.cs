@@ -4,7 +4,6 @@ using CampusGuidebook.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-
 namespace CampusGuidebook.Controllers;
 
 public class HomeController : Controller
@@ -35,16 +34,23 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    /// Naming Subject to change based off of project team's work. Returns View for Admin user input with a new EventModel instance.
+    /// Naming Subject to change based off of project team's work. Returns View for Admin user input with a new EventViewModel instance.
     /// 
     /// </summary>
     /// <returns>EventResponse view to obtain user input. Passes a new EventViewModel object to obtain user data.</returns>
     [HttpGet]
     public IActionResult EventResponse()
     {
+
+
         EventsModel EventToProcess = dbContext.EventTable
                                               .Where(e => e.UploadStatus == 0)
                                               .FirstOrDefault();
+
+        if (EventToProcess == null)
+        {
+            return RedirectToAction("NoPendingEvents");
+        }
 
         EventViewModel displayEvent = new EventViewModel()
         {
@@ -56,31 +62,69 @@ public class HomeController : Controller
             Longitude = EventToProcess.Longitude,
             Latitude = EventToProcess.Latitude,
             LastUpdated = EventToProcess.LastUpdated,
-            UploadStatus = EventToProcess.UploadStatus
+            UploadStatus = EventToProcess.UploadStatus,
 
         };
-        return EventResponse(displayEvent);
+
+        return View(displayEvent);
     }
 
     [HttpPost]
-    public IActionResult EventResponse(EventViewModel EventViewModel)
+    public IActionResult EventResponse(EventViewModel DecisionToPost)
     {
-        if (!ModelState.IsValid)
+        EventsModel UploadToDB = new()
         {
+            id = DecisionToPost.id,
+            Name = DecisionToPost.Name,
+            Description = DecisionToPost.Description,
+            Location = DecisionToPost.Location,
+            ImgUri = DecisionToPost.ImgUri,
+            Latitude = DecisionToPost.Latitude,
+            Longitude = DecisionToPost.Longitude,
+            LastUpdated = DecisionToPost.LastUpdated,
+            UploadStatus = DecisionToPost.UploadStatus
+        };
 
-            return View(EventViewModel);
-
-        }
-
-        else
-        {
-            dbContext.EventTable.Find(EventViewModel.id).UploadStatus = EventViewModel.UploadStatus;
-
-        }
-
+        dbContext.Update(UploadToDB);
         dbContext.SaveChanges();
 
-        return EventResponse();
+
+        return RedirectToAction("EventResponse"); // Returns to next pending Event in DB that is actionable. 
+    }
+
+
+
+    [HttpGet]
+    public IActionResult EventInfo()
+    {
+        //Plugging in some data to test view
+
+
+        List<EventsModel> SeedList = new List<EventsModel>();
+
+        EventsModel Event = new EventsModel();
+
+        for (int i = 0; i < 15; i++)
+        {
+            Event = new SeedData().testEventsDB.Generate();
+            SeedList.Add(Event);
+        }
+
+        dbContext.AddRange(SeedList);
+        dbContext.SaveChanges();
+        //This can be removed for Bogus, but the code runs 
+
+        EventSearchResultVM eventSearchResults = new EventSearchResultVM();
+        eventSearchResults.EventList = dbContext.EventTable.Where(e => e.id >= 0);
+
+        return View(eventSearchResults);
+    }
+
+    public IActionResult NoPendingEvents()
+    {
+        return View();
     }
 }
+
+
 
