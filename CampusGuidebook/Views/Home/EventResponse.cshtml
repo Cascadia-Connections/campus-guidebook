@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+<body>
 
 <h1>Pending Event</h1>
 
@@ -48,7 +48,7 @@
     <div>
         <h2>Approve or reject the Event</h2>
             <label asp-for="UploadStatus">Event Decision?:</label>
-            <select type="text" asp-for="UploadStatus">
+            <select id="isRejected" asp-for="UploadStatus">
                 <option value=1>Approve</option>
                 <option value=2>Reject</option>
             </select>
@@ -69,3 +69,6 @@
        border-right: solid 1px black;
    }
 </style>
+
+<script type="text/javascript" src="~/js/EventResponseAjax.js"></script>
+</body>
