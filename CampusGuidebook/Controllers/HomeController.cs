@@ -70,7 +70,7 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult EventResponse(EventViewModel DecisionToPost)
+    public IActionResult EventResponse(EventViewModel DecisionToPost)// todo: add rejection list for dropdown
     {
         EventsModel UploadToDB = new()
         {
@@ -112,7 +112,7 @@ public class HomeController : Controller
 
         dbContext.AddRange(SeedList);
         dbContext.SaveChanges();
-        //This can be removed for Bogus, but the code runs 
+        //This can be removed for Bogus, but the code runs
 
         EventSearchResultVM eventSearchResults = new EventSearchResultVM();
         eventSearchResults.EventList = dbContext.EventTable.Where(e => e.id >= 0);
@@ -123,6 +123,18 @@ public class HomeController : Controller
     public IActionResult NoPendingEvents()
     {
         return View();
+    }
+
+    [HttpPost]
+    public IActionResult storeRejectReason(string reason) { //sifts through current rejection reasons for a duplicate and stores new one
+
+
+        if (dbContext.RejectTable.) {// todo: find how to add rejection table
+
+        } else { 
+
+        }
+        dbContext.
     }
 }
 

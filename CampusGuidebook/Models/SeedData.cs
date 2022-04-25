@@ -4,7 +4,6 @@ namespace CampusGuidebook.Models
 {
     public class SeedData
     {
-
         public Faker<EventsModel> testEventsDB = new Faker<EventsModel>()
               .RuleFor(em => em.id, f => f.IndexFaker)
               .RuleFor(em => em.Name, f => f.Name.JobArea())
@@ -15,8 +14,5 @@ namespace CampusGuidebook.Models
               .RuleFor(em => em.Latitude, f => f.Rant.Review())
               .RuleFor(em => em.LastUpdated, f => f.Date.Past())
               .RuleFor(em => em.UploadStatus, f => f.Random.Int(0, 2));
-
-
-
     }
 }
