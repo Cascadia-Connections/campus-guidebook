@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 
 namespace CampusGuidebook.ViewModels
 {
@@ -31,6 +32,9 @@ namespace CampusGuidebook.ViewModels
         public DateTime LastUpdated { get; set; } = DateTime.UtcNow;
 
         public int UploadStatus { get; set; } = 0;
+
+        [Required]
+        public IQueryable<RejectModel> listOfReasons{ get; set;}
 
     }
 }

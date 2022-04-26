@@ -28,6 +28,16 @@ namespace CampusGuidebook.Migrations
                 {
                     table.PrimaryKey("PK_EventTable", x => x.id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "RejectTable",
+                columns: table => new {
+                    id = table.Column<long>(type: "bigint", nullable: false),
+                    Reason = table.Column<string>(type: "nvarchar(1000)", nullable: false)
+                },
+                constraints: table => {
+                    table.PrimaryKey("PK_RejectTable", r => r.id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
