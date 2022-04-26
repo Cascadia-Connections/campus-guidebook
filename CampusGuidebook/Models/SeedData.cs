@@ -14,5 +14,9 @@ namespace CampusGuidebook.Models
               .RuleFor(em => em.Latitude, f => f.Rant.Review())
               .RuleFor(em => em.LastUpdated, f => f.Date.Past())
               .RuleFor(em => em.UploadStatus, f => f.Random.Int(0, 2));
-    }
+
+        public Faker<RejectModel> testReasonsDB = new Faker<RejectModel>()
+              .RuleFor(em => em.id, x => x.IndexFaker)
+              .RuleFor(em => em.reason, x => x.Phone.PhoneNumber());//added phone because I did not see
+    }// some kind of sentance option
 }

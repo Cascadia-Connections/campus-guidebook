@@ -39,14 +39,14 @@ public class HomeController : Controller
     /// </summary>
     /// <returns>EventResponse view to obtain user input. Passes a new EventViewModel object to obtain user data.</returns>
     [HttpGet]
-    public IActionResult EventResponse()
+    public IActionResult EventResponse()// todo: add rejection list for dropdown
     {
 
 
         EventsModel EventToProcess = dbContext.EventTable
                                               .Where(e => e.UploadStatus == 0)
                                               .FirstOrDefault();
-
+        RejectModel PossibleRejectReasons = dbContext.RejectTable.Select(u=>u.);//todo: add all reasons
         if (EventToProcess == null)
         {
             return RedirectToAction("NoPendingEvents");
@@ -63,6 +63,7 @@ public class HomeController : Controller
             Latitude = EventToProcess.Latitude,
             LastUpdated = EventToProcess.LastUpdated,
             UploadStatus = EventToProcess.UploadStatus,
+            listOfReasons = PossibleRejectReasons,
 
         };
 
@@ -70,7 +71,7 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult EventResponse(EventViewModel DecisionToPost)// todo: add rejection list for dropdown
+    public IActionResult EventResponse(EventViewModel DecisionToPost)
     {
         EventsModel UploadToDB = new()
         {
@@ -127,13 +128,13 @@ public class HomeController : Controller
 
     [HttpPost]
     public IActionResult storeRejectReason(string reason) { //sifts through current rejection reasons for a duplicate and stores new one
+        dbContext.RejectTable.Where(e => e.reason.Equals(reason));
 
-
-        if () {// todo: find how to add rejection table
-
-        } else { 
-
+        if (RejectTable) {// todo: find how to add rejection table
+            return View();
+        } else {
+            dbContext.Add();
+            return View();
         }
-        dbContext.
     }
 }
