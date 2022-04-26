@@ -11,16 +11,20 @@ $(document).ready(function () {
         if (isRejected == 2) {
             $("#RejectionReason").removeAttr("hidden");
             $("#RejectionLabel").removeAttr("hidden");
+            $("#ConditionsReason").removeAttr("hidden");
+            $("#ConditionsLabel").removeAttr("hidden");
         } else {
             $("#RejectionReason").attr("hidden", "true");
             $("#RejectionLabel").attr("hidden", "true");
+            $("#ConditionsReason").attr("hidden", "true");
+            $("#ConditionsLabel").attr("hidden", "true");
         }
     });
 
     
     //$.ajax({
-    //    type: "POST",
-    //    url: 'https://localhost:7212/',
+    //    type: "GET",
+    //    url: 'https://localhost:7212/EventApi/',
     //    dataType: "test",
     //    success: function (data) {
 
