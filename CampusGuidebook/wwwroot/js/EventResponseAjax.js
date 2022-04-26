@@ -10,8 +10,10 @@ $(document).ready(function () {
 
         if (isRejected == 2) {
             $("#RejectionReason").removeAttr("hidden");
+            $("#RejectionLabel").removeAttr("hidden");
         } else {
             $("#RejectionReason").attr("hidden", "true");
+            $("#RejectionLabel").attr("hidden", "true");
         }
     });
 
