@@ -47,11 +47,15 @@
 
     <div>
         <h2>Approve or reject the Event</h2>
+
             <label asp-for="UploadStatus">Event Decision?:</label>
+
             <select id="isRejected" asp-for="UploadStatus">
                 <option value=1>Approve</option>
                 <option value=2>Reject</option>
             </select>
+
+            <textarea id="RejectionReason" hidden = "true"></textarea>
     </div>
 
     <button class="" type="submit" asp-controller="Home" asp-action="EventResponse">Submit</button>

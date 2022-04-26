@@ -5,9 +5,17 @@ $(document).ready(function () {
     var isRejected = $("#isRejected").val();
 
     $("#isRejected").change(function () {
+
         isRejected = $("#isRejected").val();
-        alert(isRejected);
+
+        if (isRejected == 2) {
+            $("#RejectionReason").removeAttr("hidden");
+        } else {
+            $("#RejectionReason").attr("hidden", "true");
+        }
     });
+
+    
     //$.ajax({
     //    type: "POST",
     //    url: 'https://localhost:7212/',
