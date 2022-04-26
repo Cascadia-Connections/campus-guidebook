@@ -129,7 +129,7 @@ public class HomeController : Controller
     public IActionResult storeRejectReason(string reason) { //sifts through current rejection reasons for a duplicate and stores new one
 
 
-        if (dbContext.RejectTable.) {// todo: find how to add rejection table
+        if () {// todo: find how to add rejection table
 
         } else { 
 

@@ -9,6 +9,9 @@ namespace CampusGuidebook.Models
         public long id { get; set; }
 
         [Required]
+        public long reasonid { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
         [Required]

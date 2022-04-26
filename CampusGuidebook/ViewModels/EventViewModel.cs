@@ -1,4 +1,4 @@
-﻿
+﻿using CampusGuidebook.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace CampusGuidebook.ViewModels
