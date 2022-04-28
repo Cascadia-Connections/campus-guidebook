@@ -46,7 +46,7 @@ public class HomeController : Controller
                                               .Where(e => e.UploadStatus == 0)
                                               .FirstOrDefault();
 
-        IQueryable<RejectModel> PossibleRejectReasons = dbContext.RejectTable.All
+        IQueryable<RejectModel> PossibleRejectReasons = dbContext.RejectTable.All<RejectModel>(d=>d);
         if (EventToProcess == null)
         {
             return RedirectToAction("NoPendingEvents");
@@ -99,7 +99,7 @@ public class HomeController : Controller
     public IActionResult EventInfo()
     {
 
-        //-------------- Populate database ---------------------
+        //-------------- Populate database --------------------- todo: make it populate once instaid of every time
         List<EventsModel> EventSeedList = new List<EventsModel>();
         List<RejectModel> rejectSeedList = new List<RejectModel>();
         EventsModel Event = new EventsModel();
@@ -129,12 +129,11 @@ public class HomeController : Controller
 
     [HttpPost]
     public IActionResult storeRejectReason(string reason) { //sifts through current rejection reasons for a duplicate and stores new one
-        dbContext.RejectTable.Where(e => e.reason.Equals(reason));
-
-        if (RejectTable) {// todo: find how to add rejection table
+        
+        if (dbContext.RejectTable.Any<RejectModel>(u=>u.reason == reason)) {// todo: find how to add rejection table
             return View();
         } else {
-            dbContext.Add();
+            dbContext.RejectTable.Add(reason);
             return View();
         }
     }
