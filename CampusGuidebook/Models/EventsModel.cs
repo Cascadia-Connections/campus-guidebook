@@ -35,5 +35,6 @@ namespace CampusGuidebook.Models
         [Required]
         public int UploadStatus { get; set; }
 
+        public IQueryable<RejectModel> RejectionList { get; set; }
     }
 }

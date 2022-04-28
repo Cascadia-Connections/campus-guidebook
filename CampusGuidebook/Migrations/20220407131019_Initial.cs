@@ -15,7 +15,6 @@ namespace CampusGuidebook.Migrations
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    reasonid = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -28,7 +27,6 @@ namespace CampusGuidebook.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EventTable", x => x.id);
-                    table.;
                 });
 
             migrationBuilder.CreateTable(
@@ -40,11 +38,6 @@ namespace CampusGuidebook.Migrations
                 constraints: table => {
                     table.PrimaryKey("PK_RejectTable", r => r.id);
                 });
-
-            //modelBuilder.Entity<>()
-           //     .HasMany(x => x.id)
-          //      .WithMany(r => r.id)
-         //       .HasForeignKey();
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

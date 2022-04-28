@@ -42,11 +42,11 @@ public class HomeController : Controller
     public IActionResult EventResponse()// todo: add rejection list for dropdown
     {
 
-
         EventsModel EventToProcess = dbContext.EventTable
                                               .Where(e => e.UploadStatus == 0)
                                               .FirstOrDefault();
-        RejectModel PossibleRejectReasons = dbContext.RejectTable.Select(u=>u.);//todo: add all reasons
+
+        IQueryable<RejectModel> PossibleRejectReasons = dbContext.RejectTable.All
         if (EventToProcess == null)
         {
             return RedirectToAction("NoPendingEvents");
@@ -98,22 +98,23 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult EventInfo()
     {
-        //Plugging in some data to test view
 
-
-        List<EventsModel> SeedList = new List<EventsModel>();
-
+        //-------------- Populate database ---------------------
+        List<EventsModel> EventSeedList = new List<EventsModel>();
+        List<RejectModel> rejectSeedList = new List<RejectModel>();
         EventsModel Event = new EventsModel();
-
+        RejectModel Reject = new RejectModel();
         for (int i = 0; i < 15; i++)
         {
             Event = new SeedData().testEventsDB.Generate();
-            SeedList.Add(Event);
+            EventSeedList.Add(Event);
+            Reject = new SeedData().testReasonsDB.Generate();
+            rejectSeedList.Add(Reject);
         }
-
-        dbContext.AddRange(SeedList);
+        dbContext.RejectTable.AddRange(rejectSeedList);
+        dbContext.EventTable.AddRange(EventSeedList);
         dbContext.SaveChanges();
-        //This can be removed for Bogus, but the code runs
+        //-------------------------------------------------------
 
         EventSearchResultVM eventSearchResults = new EventSearchResultVM();
         eventSearchResults.EventList = dbContext.EventTable.Where(e => e.id >= 0);
