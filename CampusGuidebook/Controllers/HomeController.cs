@@ -133,7 +133,10 @@ public class HomeController : Controller
         if (dbContext.RejectTable.Any<RejectModel>(u=>u.reason == reason)) {// todo: find how to add rejection table
             return View();
         } else {
-            dbContext.RejectTable.Add(reason);
+            RejectModel Temp = new RejectModel();
+            Temp.reason = reason;
+            dbContext.RejectTable.Add(Temp);
+            dbContext.SaveChanges();
             return View();
         }
     }
