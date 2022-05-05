@@ -33,6 +33,8 @@ namespace CampusGuidebook.ViewModels
 
         public int UploadStatus { get; set; } = 0;
 
+        public bool ShowReject { get; set; } = false;
+
         [Required]
         public IQueryable<RejectModel> listOfReasons{ get; set;}
 

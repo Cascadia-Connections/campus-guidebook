@@ -122,9 +122,17 @@ public class HomeController : Controller
         return View(eventSearchResults);
     }
 
-    public IActionResult NoPendingEvents()
-    {
+    public IActionResult NoPendingEvents() {
         return View();
+    }
+
+    public IActionResult OpenReason(EventViewModel hi) {// Redisplays the view with text boxes for reasons
+        hi.ShowReject = true;
+        return View(hi);
+    }
+    public IActionResult CloseReason(EventViewModel hello) { // closes the text box
+        hello.ShowReject = true;
+        return View(hello);
     }
 
     [HttpPost]

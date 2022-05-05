@@ -2,9 +2,8 @@
 @addTagHelper "*, Microsoft.aspNetCore.Mvc.TagHelpers"
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var visability = Model.ShowReject ? "block" : "none";
 }
-
-
 
 <h1>Pending Event</h1>
 
@@ -49,14 +48,18 @@
         <h2>Approve or reject the Event</h2>
             <label asp-for="UploadStatus">Event Decision?:</label>
             <select type="text" asp-for="UploadStatus">
-                <option value=1>Approve</option>
-                <option value=2>Reject</option>
+                <option value=1 asp-controller="Home" asp-action="CloseReason">Approve</option>
+                <option value=2 asp-controller="Home" asp-action="OpenReason">Reject</option>
+                <option value=3 asp-controller="Home" asp-action="OpenReason">Request changes</option>
             </select>
     </div>
 
     <button class="" type="submit" asp-controller="Home" asp-action="EventResponse">Submit</button>
 </form>
-
+<span style="display:@visability">
+    <p>State a reason or pick a reason</p>
+    <select typeof="text"></select><!-- I have no Idea how to display all of the reasons-->
+</span>
 
 
 <!-- In Page temp styles for readability-->
