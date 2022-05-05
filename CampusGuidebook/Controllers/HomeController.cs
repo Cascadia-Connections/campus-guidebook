@@ -46,7 +46,7 @@ public class HomeController : Controller
                                               .Where(e => e.UploadStatus == 0)
                                               .FirstOrDefault();
 
-        IQueryable<RejectModel> PossibleRejectReasons = dbContext.RejectTable.All<RejectModel>(d=>d);
+        IEnumerable<RejectModel> PossibleRejectReasons = dbContext.RejectTable;
         if (EventToProcess == null)
         {
             return RedirectToAction("NoPendingEvents");

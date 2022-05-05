@@ -36,7 +36,7 @@ namespace CampusGuidebook.ViewModels
         public bool ShowReject { get; set; } = false;
 
         [Required]
-        public IQueryable<RejectModel> listOfReasons{ get; set;}
+        public IEnumerable<RejectModel> listOfReasons{ get; set;}
 
     }
 }
