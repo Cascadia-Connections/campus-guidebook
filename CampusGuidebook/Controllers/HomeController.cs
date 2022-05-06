@@ -111,8 +111,8 @@ public class HomeController : Controller
             Reject = new SeedData().testReasonsDB.Generate();
             rejectSeedList.Add(Reject);
         }
-        dbContext.RejectTable.AddRange(rejectSeedList);
         dbContext.EventTable.AddRange(EventSeedList);
+        dbContext.RejectTable.AddRange(rejectSeedList);
         dbContext.SaveChanges();
         //-------------------------------------------------------
 

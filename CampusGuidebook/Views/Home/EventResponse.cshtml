@@ -5,28 +5,18 @@
     var visability = Model.ShowReject ? "block" : "none";
 }
 
-<h1>Pending Event</h1>
+<h1>Requested Event</h1>
 
 <table>
   <tr>
     <th>Event Name</th>
     <th>Description</th>
     <th>Location</th>
-    <th>ImgUri</th>
-    <th>Longitude</th>
-    <th>Latitude</th>
-    <th>LastUpdated</th>
-    <th>UploadStatus</th>
   </tr>
   <tr>
     <td>@Model.Name</td>
     <td>@Model.Description</td>
     <td>@Model.Location</td>
-    <td>@Model.ImgUri</td>
-    <td>@Model.Longitude</td>
-    <td>@Model.Latitude</td>
-    <td>@Model.LastUpdated</td>
-    <td>@Model.UploadStatus</td>
   </tr>
 </table>
 
@@ -34,14 +24,9 @@
 <form asp-controller="Home" asp-action="EventResponse" method="Post">
 
     <div hidden="true">
-    <input asp-for= "id" value=@Model.id>
     <input asp-for= "Name" value=@Model.Name>
     <input asp-for= "Description" value=@Model.Description>
     <input asp-for= "Location" value=@Model.Location>
-    <input asp-for= "ImgUri" value=@Model.ImgUri>
-    <input asp-for= "Longitude" value=@Model.Longitude>
-    <input asp-for= "Latitude" value=@Model.Latitude>
-    <input asp-for= "LastUpdated" value=@Model.LastUpdated>
     </div>
 
     <div>
@@ -49,16 +34,20 @@
             <label asp-for="UploadStatus">Event Decision?:</label>
             <select type="text" asp-for="UploadStatus">
                 <option value=1 asp-controller="Home" asp-action="CloseReason">Approve</option>
-                <option value=2 asp-controller="Home" asp-action="OpenReason">Reject</option>
                 <option value=3 asp-controller="Home" asp-action="OpenReason">Request changes</option>
+                <option value=2 asp-controller="Home" asp-action="OpenReason">Denied</option>
+                
             </select>
     </div>
 
-    <button class="" type="submit" asp-controller="Home" asp-action="EventResponse">Submit</button>
+    
 </form>
 <span style="display:@visability">
-    <p>State a reason or pick a reason</p>
-    <select typeof="text"></select><!-- I have no Idea how to display all of the reasons-->
+    <p>pick or state a reason</p>
+    <select typeof="text" asp-items="@new SelectList(@Model.listOfReasons)"></select>
+        <option disabled selected value="">Select a reason</option>
+    <imput typeof="text"></imput>
+        <button class="" type="submit" asp-controller="Home" asp-action="EventResponse">Submit</button>
 </span>
 
 
