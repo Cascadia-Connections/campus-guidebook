@@ -1,9 +1,23 @@
-﻿using CampusGuidebook.Data;
+using CampusGuidebook.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+//var connectionString = builder.Configuration.GetConnectionString("AppIdentityDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AppIdentityDbContextConnection' not found.");
+/*
+builder.Services.AddDbContext<AppIdentityDbContext>(options =>
+    options.UseSqlServer(connectionString));;
 
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<AppIdentityDbContext>();;
+//var connectionString = builder.Configuration.GetConnectionString("AppIdentity-SqlServer") ?? throw new InvalidOperationException("Connection string 'AppIdentityDbContextConnection' not found.");
+/*
+builder.Services.AddDbContext<AppIdentityDbContext>(options =>
+    options.UseSqlServer(connectionString));;
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<AppIdentityDbContext>();;
+*/
 // Add Databases Services to Container.
 var DefaultConnectionString = builder.Configuration.GetConnectionString("AppDefault-SqlServer");
 var IdentityConnectionString = builder.Configuration.GetConnectionString("AppIdentity-SqlServer");
@@ -18,7 +32,8 @@ builder.Services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlSer
 
 // Add Developer, Identity and Controller Services
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => { options.SignIn.RequireConfirmedAccount = false; options.SignIn.RequireConfirmedEmail = false; })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppIdentityDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<AppDbContext>();
