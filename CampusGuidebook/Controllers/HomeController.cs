@@ -1,6 +1,7 @@
 ﻿using CampusGuidebook.Data;
 using CampusGuidebook.Models;
 using CampusGuidebook.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -92,9 +93,8 @@ public class HomeController : Controller
         return RedirectToAction("EventResponse"); // Returns to next pending Event in DB that is actionable. 
     }
 
-
-
     [HttpGet]
+    [Authorize(Policy = "RequireAdmin")]
     public IActionResult EventInfo()
     {
         //Plugging in some data to test view

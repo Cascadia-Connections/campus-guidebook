@@ -41,6 +41,10 @@ builder.Services.AddScoped<AppDbContext>();
 //DIJ for AppDbContext
 builder.Services.AddScoped<AppDbContext>();
 
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("RequireAdmin", policy => policy.RequireClaim("Administrator"));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
