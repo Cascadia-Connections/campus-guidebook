@@ -29,6 +29,8 @@ namespace CampusGuidebook.ViewModels
 
         public bool ShowReject { get; set; } = false;
 
+        public String ClubName { get; set; }= string.Empty;
+
         [Required]
         public IEnumerable<RejectModel> listOfReasons{ get; set;}
 

@@ -10,13 +10,17 @@
 <table>
   <tr>
     <th>Event Name</th>
-    <th>Description</th>
+    <th>Club name</th>
     <th>Location</th>
+    <th>Description</th>
+    <th>Image</th>
   </tr>
   <tr>
     <td>@Model.Name</td>
-    <td>@Model.Description</td>
+    <td>@Model.ClubName</td>
     <td>@Model.Location</td>
+    <td>@Model.Description</td>
+    <td><img src="@Model.ImgUri"></td>
   </tr>
 </table>
 
@@ -25,36 +29,42 @@
 
     <div hidden="true">
     <input asp-for= "Name" value=@Model.Name>
-    <input asp-for= "Description" value=@Model.Description>
+    <input asp-for= "ClubName" value=@Model.ClubName>
     <input asp-for= "Location" value=@Model.Location>
-    </div>
-
-    <div>
-        <h2>Approve or reject the Event</h2>
-            <label asp-for="UploadStatus">Event Decision?:</label>
-            <select type="text" asp-for="UploadStatus">
-                <option value=1 asp-controller="Home" asp-action="CloseReason">Approve</option>
-                <option value=3 asp-controller="Home" asp-action="OpenReason">Request changes</option>
-                <option value=2 asp-controller="Home" asp-action="OpenReason">Denied</option>
-                
-            </select>
-    </div>
-
+    <input asp-for= "Description" value=@Model.Description>
+    <input asp-for= "ImgUri" value=@Model.ImgUri>
     
-</form>
-<span style="display:@visability">
-    <p>pick or state a reason</p>
-    <select typeof="text" asp-items="@new SelectList(@Model.listOfReasons)"></select>
-        <option disabled selected value="">Select a reason</option>
-    <imput typeof="text"></imput>
-        <button class="" type="submit" asp-controller="Home" asp-action="EventResponse">Submit</button>
-</span>
+    </div>
 
+   
+    <h2>Administrative responce</h2>
+    <div class="selectToLeft">
+        <label asp-for="UploadStatus">Event Decision?:</label>
+        <select type="text" asp-for="UploadStatus">
+            <option value=1 asp-controller="Home" asp-action="CloseReason">Approve</option>
+            <option value=3 asp-controller="Home" asp-action="OpenReason">Request changes</option>
+            <option value=2 asp-controller="Home" asp-action="OpenReason">Denied</option>
+        </select>
+    </div>
+    
+    <span style="display:@visability" class="TxtBoxToRight">
+        <p>pick or state a reason</p>
+        <select typeof="text" asp-items="@new SelectList(@Model.listOfReasons)"></select>
+            <option disabled selected value="">Select a reason</option>
+        <textarea class="col-5"id="RejectionReason" hidden ="true"></textarea>
+    </span>
+    <button class="" type="submit" asp-controller="Home" asp-action="EventResponse">Submit</button>
+</form>
 
 <!-- In Page temp styles for readability-->
 
 <style>
-    
+   .selectToLeft{
+   float: left;
+   clear: both;
+   } .TxtBoxToRight{
+   padding-left: .5rem;
+   }
    th{
        padding-left: .5rem;
        padding-right: .5rem;
