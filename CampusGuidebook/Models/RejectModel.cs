@@ -8,8 +8,5 @@ namespace CampusGuidebook.Models
         public long id { get; set; }
         [Required]
         public string reason { get; set; }
-
-        [Required]
-        public IQueryable<EventsModel> Events { get; set; }
     }
 }

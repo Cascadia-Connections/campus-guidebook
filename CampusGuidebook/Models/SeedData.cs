@@ -17,6 +17,10 @@ namespace CampusGuidebook.Models
 
         public Faker<RejectModel> testReasonsDB = new Faker<RejectModel>()
               .RuleFor(em => em.id, x => x.IndexFaker)
-              .RuleFor(em => em.reason, x => x.Phone.PhoneNumber());//added phone because I did not see
-    }// some kind of sentance option
+              .RuleFor(em => em.reason, x => x.Lorem.Paragraph());
+
+        public Faker<ClubModel> testClubDB = new Faker<ClubModel>()
+            .RuleFor(e => e.Id, m => m.IndexFaker)
+            .RuleFor(e => e.ClubName, m => m.Name.JobTitle());
+    }
 }

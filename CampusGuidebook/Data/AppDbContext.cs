@@ -11,5 +11,6 @@ namespace CampusGuidebook.Data
 
         public DbSet<EventsModel> EventTable { get; set; }
         public DbSet<RejectModel> RejectTable { get; set; }
+        public DbSet<ClubModel> ClubTable { get; set; }
     }
 }

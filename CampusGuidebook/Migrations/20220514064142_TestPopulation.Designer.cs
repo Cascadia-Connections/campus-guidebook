@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampusGuidebook.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220407131019_Initial")]
-    partial class Initial
+    [Migration("20220514064142_TestPopulation")]
+    partial class TestPopulation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,23 @@ namespace CampusGuidebook.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("CampusGuidebook.Models.ClubModel", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("ClubName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ClubTable");
+                });
 
             modelBuilder.Entity("CampusGuidebook.Models.EventsModel", b =>
                 {
@@ -62,9 +79,29 @@ namespace CampusGuidebook.Migrations
                     b.Property<int>("UploadStatus")
                         .HasColumnType("int");
 
+                    b.Property<long>("reasonid")
+                        .HasColumnType("bigint");
+
                     b.HasKey("id");
 
                     b.ToTable("EventTable");
+                });
+
+            modelBuilder.Entity("CampusGuidebook.Models.RejectModel", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("id"), 1L, 1);
+
+                    b.Property<string>("reason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("RejectTable");
                 });
 #pragma warning restore 612, 618
         }

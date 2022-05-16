@@ -23,12 +23,6 @@ namespace CampusGuidebook.ViewModels
         public string ImgUri { get; set; } = string.Empty;
 
         [Required]
-        public String Longitude { get; set; } = String.Empty;
-
-        [Required]
-        public String Latitude { get; set; } = String.Empty;
-
-        [Required]
         public DateTime LastUpdated { get; set; } = DateTime.UtcNow;
 
         public int UploadStatus { get; set; } = 0;
@@ -37,6 +31,8 @@ namespace CampusGuidebook.ViewModels
 
         [Required]
         public IEnumerable<RejectModel> listOfReasons{ get; set;}
+
+
 
     }
 }

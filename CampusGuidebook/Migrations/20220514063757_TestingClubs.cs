@@ -5,16 +5,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CampusGuidebook.Migrations
 {
-    public partial class Initial : Migration
+    public partial class TestingClubs : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ClubTable",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClubName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClubTable", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "EventTable",
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    reasonid = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -31,19 +45,28 @@ namespace CampusGuidebook.Migrations
 
             migrationBuilder.CreateTable(
                 name: "RejectTable",
-                columns: table => new {
-                    id = table.Column<long>(type: "bigint", nullable: false),
-                    reason = table.Column<string>(type: "nvarchar(1000)", nullable: false)
+                columns: table => new
+                {
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    reason = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
-                constraints: table => {
-                    table.PrimaryKey("PK_RejectTable", r => r.id);
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RejectTable", x => x.id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ClubTable");
+
+            migrationBuilder.DropTable(
                 name: "EventTable");
+
+            migrationBuilder.DropTable(
+                name: "RejectTable");
         }
     }
 }

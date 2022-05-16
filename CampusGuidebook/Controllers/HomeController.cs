@@ -59,8 +59,6 @@ public class HomeController : Controller
             Description = EventToProcess.Description,
             Location = EventToProcess.Location,
             ImgUri = EventToProcess.ImgUri,
-            Longitude = EventToProcess.Longitude,
-            Latitude = EventToProcess.Latitude,
             LastUpdated = EventToProcess.LastUpdated,
             UploadStatus = EventToProcess.UploadStatus,
             listOfReasons = PossibleRejectReasons,
@@ -80,8 +78,6 @@ public class HomeController : Controller
             Description = DecisionToPost.Description,
             Location = DecisionToPost.Location,
             ImgUri = DecisionToPost.ImgUri,
-            Latitude = DecisionToPost.Latitude,
-            Longitude = DecisionToPost.Longitude,
             LastUpdated = DecisionToPost.LastUpdated,
             UploadStatus = DecisionToPost.UploadStatus
         };
@@ -102,17 +98,22 @@ public class HomeController : Controller
         //-------------- Populate database --------------------- todo: make it populate once instaid of every time
         List<EventsModel> EventSeedList = new List<EventsModel>();
         List<RejectModel> rejectSeedList = new List<RejectModel>();
+        List<ClubModel> ClubSeedList = new List<ClubModel>();
         EventsModel Event = new EventsModel();
         RejectModel Reject = new RejectModel();
+        ClubModel Club = new ClubModel();
         for (int i = 0; i < 15; i++)
         {
             Event = new SeedData().testEventsDB.Generate();
             EventSeedList.Add(Event);
             Reject = new SeedData().testReasonsDB.Generate();
             rejectSeedList.Add(Reject);
+            Club = new SeedData().testClubDB.Generate();
+            ClubSeedList.Add(Club);
         }
         dbContext.EventTable.AddRange(EventSeedList);
         dbContext.RejectTable.AddRange(rejectSeedList);
+        dbContext.ClubTable.AddRange(ClubSeedList);
         dbContext.SaveChanges();
         //-------------------------------------------------------
 
