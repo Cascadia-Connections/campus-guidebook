@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+//Branch 13 & 14 have a table for event rejection response and reasoning and branch 19 has the log-in/logout/register
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add Databases Services to Container.
