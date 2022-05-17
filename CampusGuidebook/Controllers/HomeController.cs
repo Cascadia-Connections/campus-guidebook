@@ -45,7 +45,7 @@ public class HomeController : Controller
         EventsModel EventToProcess = dbContext.EventTable
                                               .Where(e => e.UploadStatus == 0)
                                               .FirstOrDefault();
-        IEnumerable<ClubModel> ClubToProcess = dbContext.ClubTable;
+        ClubModel ClubToProcess = dbContext.ClubTable.Where(e => e.Id.Equals(EventToProcess.id)).FirstOrDefault();
 
         IEnumerable<RejectModel> PossibleRejectReasons = dbContext.RejectTable;
         if (EventToProcess == null)
@@ -63,7 +63,7 @@ public class HomeController : Controller
             LastUpdated = EventToProcess.LastUpdated,
             UploadStatus = EventToProcess.UploadStatus,
             listOfReasons = PossibleRejectReasons,
-            ClubName = ClubToProcess.ClubName,//passing in multiple when only need one
+            ClubName = ClubToProcess.ClubName, //dummy
         };
 
         return View(displayEvent);
