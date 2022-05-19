@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampusGuidebook.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220407131019_Initial")]
+    [Migration("20220426205914_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
