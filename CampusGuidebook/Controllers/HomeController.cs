@@ -140,7 +140,7 @@ public class HomeController : Controller
         return View();
         RejectModel Passin = new RejectModel();
         Passin.reason = reason;
-        _event.reasonid = reason.id;
+       // _event.reasonid = reason.id;
 
         
         dbContext.RejectTable.Add(Passin);
