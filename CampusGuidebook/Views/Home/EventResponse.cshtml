@@ -20,7 +20,7 @@
     <td>@Model.ClubName</td>
     <td>@Model.Location</td>
     <td>@Model.Description</td>
-    <td><img src="@Model.ImgUri"></td>
+    <td><img src="@Model.ImgUri" width="4vw" height="4vh"></td>
   </tr>
 </table>
 
@@ -48,12 +48,10 @@
     </div>
     
     <span style="display:@visability" class="TxtBoxToRight">
-        <p>pick or state a reason</p>
-        <select typeof="text" asp-items="@new SelectList(@Model.listOfReasons)"></select>
-            <option disabled selected value="">Select a reason</option>
+        <p>state a reason</p>
         <textarea class="col-5"id="RejectionReason" hidden ="true"></textarea>
     </span>
-    <button class="" type="submit" asp-controller="Home" asp-action="EventResponse">Submit</button>
+    <button class="SubButton" type="submit" asp-controller="Home" asp-action="EventResponse">Submit</button>
 </form>
 
 <!-- In Page temp styles for readability-->
@@ -61,10 +59,10 @@
 <style>
    .selectToLeft{
    float: left;
-   clear: both;
    } .TxtBoxToRight{
    padding-left: .5rem;
-   }
+   clear: both;
+   } .SubButton
    th{
        padding-left: .5rem;
        padding-right: .5rem;

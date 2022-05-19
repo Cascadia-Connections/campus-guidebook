@@ -34,7 +34,9 @@ namespace CampusGuidebook.Models
 
         [Required]
         public int UploadStatus { get; set; }
+        [Required]
+        public int TypeOfEvent { get; set; }
 
-        
+
     }
 }

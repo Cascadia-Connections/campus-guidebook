@@ -47,7 +47,6 @@ public class HomeController : Controller
                                               .FirstOrDefault();
         ClubModel ClubToProcess = dbContext.ClubTable.Where(e => e.Id.Equals(EventToProcess.id)).FirstOrDefault();
 
-        IEnumerable<RejectModel> PossibleRejectReasons = dbContext.RejectTable;
         if (EventToProcess == null)
         {
             return RedirectToAction("NoPendingEvents");
@@ -62,7 +61,6 @@ public class HomeController : Controller
             ImgUri = EventToProcess.ImgUri,
             LastUpdated = EventToProcess.LastUpdated,
             UploadStatus = EventToProcess.UploadStatus,
-            listOfReasons = PossibleRejectReasons,
             ClubName = ClubToProcess.ClubName, //dummy
         };
 
@@ -138,16 +136,14 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult storeRejectReason(string reason) { //sifts through current rejection reasons for a duplicate and stores new one
+    public IActionResult storeRejectReason(string reason, EventsModel _event) { //stores rejection reason with event relations
+        return View();
+        RejectModel Passin = new RejectModel();
+        Passin.reason = reason;
+        _event.reasonid = reason.id;
+
         
-        if (dbContext.RejectTable.Any<RejectModel>(u=>u.reason == reason)) {// todo: find how to add rejection table
-            return View();
-        } else {
-            RejectModel Temp = new RejectModel();
-            Temp.reason = reason;
-            dbContext.RejectTable.Add(Temp);
-            dbContext.SaveChanges();
-            return View();
-        }
+        dbContext.RejectTable.Add(Passin);
+        dbContext.SaveChanges();
     }
 }
