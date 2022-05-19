@@ -10,6 +10,7 @@ namespace CampusGuidebook.Data
 
 
         public DbSet<EventsModel> EventTable { get; set; }
+        public DbSet<EventConditions> EventConditions { get; set; }
 
     }
 }
