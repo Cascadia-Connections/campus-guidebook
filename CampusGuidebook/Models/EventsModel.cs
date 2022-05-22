@@ -20,10 +20,7 @@ namespace CampusGuidebook.Models
         [Required]
         public string ImgUri { get; set; }
 
-        [Required]
         public String Longitude { get; set; }
-
-        [Required]
         public String Latitude { get; set; }
 
         [Required]
