@@ -16,3 +16,19 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.selectToLeft {
+    float: left;
+}
+
+.TxtBoxToRight {
+    padding-left: .5rem;
+    clear: both;
+}
+
+.SubButton
+th {
+    padding-left: .5rem;
+    padding-right: .5rem;
+    border-right: solid 1px black;
+}
