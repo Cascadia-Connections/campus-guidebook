@@ -2,7 +2,6 @@
 @addTagHelper "*, Microsoft.aspNetCore.Mvc.TagHelpers"
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var visability = Model.ShowReject ? "block" : "none";
 }
 <style type="text/css" src="~/css/site.css"></style>
 <body>
@@ -45,9 +44,9 @@
         </select>
     </div>
     <div class="row mt-3">
-        <span style="display:@visability" class="TxtBoxToRight">
+        <span class="TxtBoxToRight">
             <label class="col-5" id="RejectionLabel" hidden="true">Why is this event being rejected?</label>
-            <textarea class="col-5"id="RejectionReason" hidden ="true"></textarea>
+            <textarea class="col-5"id="RejectionReason" hidden ="true">@Model.RejectReason</textarea>
             <span asp-validation-for="RejectReason" class="validation"></span>
         </span>
     </div>

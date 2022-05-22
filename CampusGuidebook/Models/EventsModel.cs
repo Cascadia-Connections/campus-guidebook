@@ -33,8 +33,9 @@ namespace CampusGuidebook.Models
         public int UploadStatus { get; set; }
         [Required]
         public String TypeOfEvent { get; set; }
+
         [Required(ErrorMessage = "Please enter a reason")]
-        public int RejectReason { get; set; }
+        public String RejectReason { get; set; } = "";
 
 
     }
