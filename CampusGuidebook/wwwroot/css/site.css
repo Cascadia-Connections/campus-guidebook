@@ -32,3 +32,6 @@ th {
     padding-right: .5rem;
     border-right: solid 1px black;
 }
+.validation{
+    color: red;
+}

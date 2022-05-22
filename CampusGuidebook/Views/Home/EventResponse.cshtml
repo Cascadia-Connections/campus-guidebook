@@ -35,10 +35,7 @@
     <input asp-for= "Location" value=@Model.Location>
     <input asp-for= "Description" value=@Model.Description>
     <input asp-for= "ImgUri" value=@Model.ImgUri>
-    
     </div>
-
-   
     <h2>Administrative responce</h2>
     <div class="selectToLeft">
         <label class="col-2 justify-content-end" asp-for="UploadStatus">Event Decision?:</label>
@@ -49,8 +46,9 @@
     </div>
     <div class="row mt-3">
         <span style="display:@visability" class="TxtBoxToRight">
-            <label class="col-5" iod="RejectionLabel" hidden="true">Why is this event being rejected?</label>
+            <label class="col-5" id="RejectionLabel" hidden="true">Why is this event being rejected?</label>
             <textarea class="col-5"id="RejectionReason" hidden ="true"></textarea>
+            <span asp-validation-for="RejectReason" class="validation"></span>
         </span>
     </div>
     <button class="SubButton" type="submit" asp-controller="Home" asp-action="EventResponse">Submit</button>

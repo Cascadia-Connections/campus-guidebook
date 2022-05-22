@@ -9,9 +9,6 @@ namespace CampusGuidebook.Models
         public long id { get; set; }
 
         [Required]
-        public long reasonid { get; set; }
-
-        [Required]
         public string Name { get; set; }
 
         [Required]
@@ -35,7 +32,9 @@ namespace CampusGuidebook.Models
         [Required]
         public int UploadStatus { get; set; }
         [Required]
-        public int TypeOfEvent { get; set; }
+        public String TypeOfEvent { get; set; }
+        [Required(ErrorMessage = "Please enter a reason")]
+        public int RejectReason { get; set; }
 
 
     }

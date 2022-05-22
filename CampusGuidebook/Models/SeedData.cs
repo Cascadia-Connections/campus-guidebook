@@ -14,12 +14,8 @@ namespace CampusGuidebook.Models
               .RuleFor(em => em.Latitude, f => f.Rant.Review())
               .RuleFor(em => em.LastUpdated, f => f.Date.Past())
               .RuleFor(em => em.UploadStatus, f => f.Random.Int(0, 2))
-              .RuleFor(em => em.TypeOfEvent, f => f.Random.Int(0, 2));
-              
-        public Faker<RejectModel> testReasonsDB = new Faker<RejectModel>()
-              .RuleFor(em => em.id, x => x.IndexFaker)
-              .RuleFor(em => em.reason, x => x.Lorem.Paragraph());
-
+              .RuleFor(em => em.TypeOfEvent, f => f.Name.FirstName());
+             
         public Faker<ClubModel> testClubDB = new Faker<ClubModel>()
             .RuleFor(e => e.Id, m => m.IndexFaker)
             .RuleFor(e => e.ClubName, m => m.Name.JobTitle());

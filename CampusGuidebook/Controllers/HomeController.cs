@@ -96,22 +96,16 @@ public class HomeController : Controller
 
         //-------------- Populate database --------------------- todo: make it populate once instaid of every time
         List<EventsModel> EventSeedList = new List<EventsModel>();
-        List<RejectModel> rejectSeedList = new List<RejectModel>();
         List<ClubModel> ClubSeedList = new List<ClubModel>();
         EventsModel Event = new EventsModel();
-        RejectModel Reject = new RejectModel();
         ClubModel Club = new ClubModel();
-        for (int i = 0; i < 15; i++)
-        {
+        for (int i = 0; i < 15; i++){
             Event = new SeedData().testEventsDB.Generate();
             EventSeedList.Add(Event);
-            Reject = new SeedData().testReasonsDB.Generate();
-            rejectSeedList.Add(Reject);
             Club = new SeedData().testClubDB.Generate();
             ClubSeedList.Add(Club);
         }
         dbContext.EventTable.AddRange(EventSeedList);
-        dbContext.RejectTable.AddRange(rejectSeedList);
         dbContext.ClubTable.AddRange(ClubSeedList);
         dbContext.SaveChanges();
         //-------------------------------------------------------
@@ -126,24 +120,13 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult OpenReason(EventViewModel hi) {// Redisplays the view with text boxes for reasons
-        hi.ShowReject = true;
-        return View(hi);
-    }
-    public IActionResult CloseReason(EventViewModel hello) { // closes the text box
-        hello.ShowReject = true;
-        return View(hello);
-    }
-
     [HttpPost]
-    public IActionResult storeRejectReason(string reason, EventsModel _event) { //stores rejection reason with event relations
+    public IActionResult storeRejectReason(string reason, EventViewModel _event) { //stores rejection reason with event relations
         return View();
-        RejectModel Passin = new RejectModel();
-        Passin.reason = reason;
-       // _event.reasonid = reason.id;
-
-        
-        dbContext.RejectTable.Add(Passin);
-        dbContext.SaveChanges();
+        if (reason != null && _event != null) {
+            _event.RejectReason = reason;
+            dbContext.Update(_event);
+            dbContext.SaveChanges();
+        }
     }
 }

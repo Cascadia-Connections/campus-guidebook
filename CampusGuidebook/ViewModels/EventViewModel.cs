@@ -27,7 +27,7 @@ namespace CampusGuidebook.ViewModels
 
         public int UploadStatus { get; set; } = 0;
 
-        public bool ShowReject { get; set; } = true;
+        public String RejectReason { get; set; } = String.Empty;
 
         public String ClubName { get; set; }= string.Empty;
 
