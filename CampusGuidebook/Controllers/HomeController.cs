@@ -94,7 +94,7 @@ public class HomeController : Controller
     }
 
     [HttpGet]
-    [Authorize(Policy = "RequireAdmin")]
+    [Authorize(Roles = "Administrator")]
     public IActionResult EventInfo()
     {
         //Plugging in some data to test view
