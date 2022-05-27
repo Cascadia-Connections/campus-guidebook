@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CampusGuidebook.Migrations
 {
-    public partial class Initial : Migration
+    public partial class testingdatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,9 +18,9 @@ namespace CampusGuidebook.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImgUri = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Longitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Latitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImgUri = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Longitude = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Latitude = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UploadStatus = table.Column<int>(type: "int", nullable: false)
                 },

@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampusGuidebook.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220407131019_Initial")]
-    partial class Initial
+    [Migration("20220527011842_adding in event time to data model")]
+    partial class addingineventtimetodatamodel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -61,6 +61,15 @@ namespace CampusGuidebook.Migrations
 
                     b.Property<int>("UploadStatus")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("eventDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("eventTime")
+                        .HasColumnType("time");
+
+                    b.Property<long>("userID")
+                        .HasColumnType("bigint");
 
                     b.HasKey("id");
 

@@ -4,6 +4,8 @@ using CampusGuidebook.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace CampusGuidebook.Controllers;
 
@@ -44,7 +46,7 @@ public class HomeController : Controller
     {
 
 
-        EventsModel EventToProcess = dbContext.EventTable
+        var EventToProcess = dbContext.EventTable
                                               .Where(e => e.UploadStatus == 0)
                                               .FirstOrDefault();
 
@@ -100,22 +102,16 @@ public class HomeController : Controller
         //Plugging in some data to test view
 
 
-        List<EventsModel> SeedList = new List<EventsModel>();
 
-        EventsModel Event = new EventsModel();
-
-        for (int i = 0; i < 15; i++)
-        {
-            Event = new SeedData().testEventsDB.Generate();
-            SeedList.Add(Event);
-        }
-
-        dbContext.AddRange(SeedList);
-        dbContext.SaveChanges();
+        //dbContext.SaveChanges();
         //This can be removed for Bogus, but the code runs 
 
         EventSearchResultVM eventSearchResults = new EventSearchResultVM();
-        eventSearchResults.EventList = dbContext.EventTable.Where(e => e.id >= 0);
+        var tester = dbContext.EventTable;
+        if (tester.Count() > 0) 
+        {
+            eventSearchResults.EventList = tester.ToList();
+        }
 
         return View(eventSearchResults);
     }
@@ -123,6 +119,34 @@ public class HomeController : Controller
     public IActionResult NoPendingEvents()
     {
         return View();
+    }
+
+    public IActionResult EventApplication()
+    {
+        return View(new EventsModel());
+    }
+    
+    [HttpPost]
+    public IActionResult AppliedEvent(EventsModel events)
+    { 
+        //events.userID
+        dbContext.Add(events);
+        dbContext.SaveChanges();
+
+        return RedirectToAction("EventStatus");
+    }
+
+    public IActionResult EventStatus()
+    {
+        EventSearchResultVM eventSearchResults = new EventSearchResultVM();
+        var tester = dbContext.EventTable;
+        if (tester.Count() > 0)
+        {
+            eventSearchResults.EventList = tester.ToList();
+        }
+
+        return View(eventSearchResults);
+
     }
 }
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampusGuidebook.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220511023017_new migration for identity core")]
-    partial class newmigrationforidentitycore
+    [Migration("20220527004626_added to the model")]
+    partial class addedtothemodel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,6 +61,9 @@ namespace CampusGuidebook.Migrations
 
                     b.Property<int>("UploadStatus")
                         .HasColumnType("int");
+
+                    b.Property<long>("userID")
+                        .HasColumnType("bigint");
 
                     b.HasKey("id");
 
