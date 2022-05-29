@@ -123,7 +123,8 @@ namespace CampusGuidebook.Areas.Identity.Pages.Account
                 {
                     var claims = new List<Claim>
                     {
-                        new Claim("amr", "pwd")
+                        new Claim("amr", "pwd"),
+                        new Claim(ClaimTypes.Sid, user.Id)
                     };
                     var roles = await _signInManager.UserManager.GetRolesAsync(user);
                     if (roles.Any())

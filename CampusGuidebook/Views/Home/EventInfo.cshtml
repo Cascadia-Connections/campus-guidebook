@@ -15,7 +15,7 @@
         if(eventInfoModel.UploadStatus == 0)
         {
         <div > <!-- Added in -->
-            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="holder">@eventInfoModel.Name</a>
+            <a class="text-dark" asp-area="" asp-route-id="@eventInfoModel.id" asp-controller="Home" asp-action="EventResponse">@eventInfoModel.Name @eventInfoModel.eventDate @eventInfoModel.Location</a>
         </div>
         }
 
@@ -28,7 +28,7 @@
         if(eventInfoModel.UploadStatus == 1)
         {
         <div > <!-- Added in -->
-            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="holder">@eventInfoModel.Name</a>
+            <a class="text-dark" asp-area="" asp-route-id="@eventInfoModel.id" asp-controller="Home" asp-action="EventResponse">@eventInfoModel.Name</a>
         </div>
         }
 
@@ -40,7 +40,7 @@
         if(eventInfoModel.UploadStatus == 2)
         {
         <div > <!-- Added in -->
-            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="holder">@eventInfoModel.Name</a>
+            <a class="text-dark" asp-area="" asp-route-id="@eventInfoModel.id" asp-controller="Home" asp-action="EventResponse">@eventInfoModel.Name</a>
         </div>
         }
 

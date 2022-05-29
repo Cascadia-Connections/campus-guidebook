@@ -8,7 +8,7 @@ namespace CampusGuidebook.Models
         public long id { get; set; }
 
         [Required]
-        public long userID { get; set; }
+        public string userID { get; set; }
 
         [Required]
         public DateTime eventDate { get; set; }
