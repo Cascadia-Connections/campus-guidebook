@@ -4,10 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <form>
 
-<h1>Event Information</h1>
+<h1>Event Status</h1>
 
 <h2>Pending Events</h2>
     @foreach (var eventInfoModel in @Model.EventList)
@@ -15,7 +14,7 @@
         if(eventInfoModel.UploadStatus == 0)
         {
         <div > <!-- Added in -->
-            <a class="text-dark" asp-area="" asp-route-id="@eventInfoModel.id" asp-controller="Home" asp-action="EventResponse">@eventInfoModel.Name @eventInfoModel.eventDate @eventInfoModel.Location</a>
+            <a class="text-dark" asp-area="" asp-route-id="@eventInfoModel.id" asp-controller="Home" asp-action="DisplayEvent">@eventInfoModel.Name @eventInfoModel.Location @eventInfoModel.eventDate</a>
         </div>
         }
 
@@ -25,10 +24,10 @@
 <h2>Approved</h2>
      @foreach (var eventInfoModel in @Model.EventList)
     {
-        if(eventInfoModel.UploadStatus == 1)
+        if(eventInfoModel.UploadStatus == 1) //Action get's page
         {
         <div > <!-- Added in -->
-            <a class="text-dark" asp-area="" asp-route-id="@eventInfoModel.id" asp-controller="Home" asp-action="EventResponse">@eventInfoModel.Name</a>
+            <a class="text-dark" asp-route-id="@eventInfoModel.id" asp-area="" asp-controller="Home" asp-action="DisplayEvent">@eventInfoModel.Name</a>
         </div>
         }
 
@@ -40,7 +39,7 @@
         if(eventInfoModel.UploadStatus == 2)
         {
         <div > <!-- Added in -->
-            <a class="text-dark" asp-area="" asp-route-id="@eventInfoModel.id" asp-controller="Home" asp-action="EventResponse">@eventInfoModel.Name</a>
+            <a class="text-dark" asp-area="" asp-route-id="@eventInfoModel.id" asp-controller="Home" asp-action="DisplayEvent">@eventInfoModel.Name</a>
         </div>
         }
 

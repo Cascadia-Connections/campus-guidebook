@@ -4,7 +4,7 @@ namespace CampusGuidebook.ViewModels
 {
     public class EventSearchResultVM
     {
-        public IQueryable<EventsModel> EventList { get; set; }
+        public List<EventsModel> EventList { get; set; } = new List<EventsModel>();
 
     }
 }
