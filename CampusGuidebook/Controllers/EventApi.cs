@@ -33,7 +33,6 @@ namespace CampusGuidebook.Controllers
         [HttpGet("{id}")]
         public IActionResult GetStatus(int ID)
         {
-
             EventsModel passin = Adbc.EventTable.Where(c => c.id == ID).FirstOrDefault();
 
             switch (passin.UploadStatus) {
@@ -42,6 +41,10 @@ namespace CampusGuidebook.Controllers
                 case 2: return Ok("Denied"); break;
             }
             return NotFound("Could not find status in ");
+        }
+        [HttpGet("{id}")]
+        public IActionResult GetAcceptedEvents() { 
+        return Ok(Adbc.EventTable.Where(u => u.UploadStatus == 1));
         }
 
         [HttpPost]
