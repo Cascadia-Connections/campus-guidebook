@@ -2,7 +2,7 @@
 Cascadia-UWB clubs, events and sustainability features
 
 Spring Quarter Team 2022 Summary:
-The web app is here to support the mobile app. This is where the administrator and moderator may view, apply, and edit an event. The moderator is here to approve, deny, or send an event back to the moderator for amendments needed for approval. The administrator and moderator will both need to register an account in the database in order to do anything listed above. A member will be able to view events for any club and be able to view the event in the mobile app for more information in order to attend the event.
+The web app is here to support the mobile app through the .NET REST API. This is where the administrator and moderator may view, apply, and edit an event. The moderator is here to approve, deny, or send an event back to the moderator for amendments needed for approval. The administrator and moderator will both need to register an account in the database in order to do anything listed above. A member will be able to view events for any club and be able to view the event in the mobile app for more information in order to attend the event.
 
 Completed MVP during Spring 2022:
   * A full log in process that saves in the database
