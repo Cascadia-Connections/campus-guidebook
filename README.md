@@ -12,4 +12,4 @@ Completed MVP during Spring 2022:
   * Edit Event for moderators and administrators
   * A way to hide tabs from moderators that only administrators should see
 
-Look at Project Backlog for next steps for the web app.
+Look at [the Project Backlog](https://github.com/Cascadia-Connections/campus-guidebook/projects/1) for next steps for the web app.
