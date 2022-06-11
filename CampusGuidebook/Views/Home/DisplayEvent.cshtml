@@ -1,0 +1,29 @@
+﻿@addTagHelper "*, Microsoft.aspNetCore.Mvc.TagHelpers"
+@model CampusGuidebook.Models.EventsModel;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form asp-route-id="@Model.id" asp-action="EditEvent" method="post">
+    <h1>Event Application</h1>
+    <br>
+    <h3>Events name</h3>
+    <p>@Model.Name</p>
+    <h3>Date of the event</h3>
+    <p>@Model.eventDate</p>
+    <h3>Time of the Event</h3>
+    <p>@Model.eventTime</p>
+    <h3>Event Description</h3>
+    <p>@Model.Description</p>
+    <h3>Event Location</h3>
+    <p>@Model.Location</p>
+    <br />
+    <br />
+    <a asp-action="Index" asp-controller="Home">Back to Home</a>
+
+    @if(User.IsInRole("Administrator") || User.IsInRole("Moderator"))
+    {
+        
+    <input type="submit" value="Edit Event">
+    }
+
+</form>

@@ -1,0 +1,24 @@
+﻿@addTagHelper "*, Microsoft.aspNetCore.Mvc.TagHelpers"
+@model CampusGuidebook.Models.EventsModel;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="SaveEdit" method="post">
+    <input type="hidden" asp-for="@Model.id" />
+    <h1>Edit Event</h1>
+    <br>
+    <h3>What is the name of the event?</h3>
+    <input type="text" asp-for="@Model.Name" />
+    <h3>What is the date of the event?</h3>
+    <input type="date" asp-for="@Model.eventDate" />
+    <h3>What is the time of the event?</h3>
+    <input type="time" asp-for="@Model.eventTime" />
+    <h3>Please describe the event</h3>
+    <input type="text" class="form-control border border-dark" asp-for="@Model.Description" />
+    <h3>Where is this located?</h3>
+    <input type="text" asp-for="@Model.Location" />
+    <br />
+    <br />
+    <input type="submit" value="Edit" />
+</form>
